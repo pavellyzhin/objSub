@@ -19,48 +19,49 @@ exports.subBlock = void 0;
 var block_1 = require("./block");
 var subBlock = /** @class */ (function (_super) {
     __extends(subBlock, _super);
-    function subBlock(cols, rows) {
-        if (cols === void 0) { cols = 0; }
-        if (rows === void 0) { rows = 0; }
-        var _this = _super.call(this) || this;
+    function subBlock(name) {
+        if (name === void 0) { name = 'A'; }
+        var _this = _super.call(this, name) || this;
         _this.rows = 0;
         _this.cols = 0;
-        _this.setCols(cols);
-        _this.setRows(rows);
         return _this;
     }
-    subBlock.prototype.moveDown = function () {
-        if (this.getRow() <= this.getRows()) {
-            this.setRow(this.getRow() + 1);
-        }
-    };
-    subBlock.prototype.moveUp = function () {
-        if (this.getRow() >= 0) {
-            this.setRow(this.getRow() - 1);
-        }
-    };
-    subBlock.prototype.moveLeft = function () {
-        if (this.getCol() >= 0) {
-            this.setCol(this.getCol() - 1);
-        }
-    };
-    subBlock.prototype.moveRight = function () {
-        if (this.getCol() <= this.getCols()) {
-            this.setCol(this.getCol() + 1);
-        }
-    };
     subBlock.prototype.setRows = function (rows) {
+        if (rows === void 0) { rows = 0; }
         this.rows = rows;
     };
     subBlock.prototype.setCols = function (cols) {
+        if (cols === void 0) { cols = 0; }
         this.cols = cols;
-    };
-    subBlock.prototype.getCols = function () {
-        return this.cols;
     };
     subBlock.prototype.getRows = function () {
         return this.rows;
     };
+    subBlock.prototype.getCols = function () {
+        return this.cols;
+    };
+    subBlock.prototype.moveLeft = function () {
+        this.setCol(this.getCol() - 1);
+    };
+    subBlock.prototype.moveUp = function () {
+        this.setRow(this.getRow() - 1);
+    };
+    subBlock.prototype.moveRight = function () {
+        this.setCol(this.getCol() + 1);
+    };
+    subBlock.prototype.moveDown = function () {
+        this.setRow(this.getRow() + 1);
+    };
+    // поменяться местами
+    // мы же самостоятельные
+    subBlock.prototype.moveReplace = function (block) {
+        var _a = [block.getCol(), block.getRow()], col = _a[0], row = _a[1];
+        var _b = [this.getCol(), this.getRow()], col1 = _b[0], row1 = _b[1];
+        block.setCol(col1);
+        block.setRow(row1);
+        this.setCol(col);
+        this.setRow(row);
+    };
     return subBlock;
-}(block_1.ObjObjblock));
+}(block_1.objBlock));
 exports.subBlock = subBlock;
