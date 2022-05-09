@@ -26,8 +26,14 @@ ___
  
 Реализуем сущность как объект.
 
+>
+> код описан на `TypeScript`
+>
+
     class objectElement {
         private id:number = 0;
+        private row:number = 0;
+        private col:number = 0;
 
         constructor(id:number=0){
             this.setId(id);
@@ -40,29 +46,8 @@ ___
         public getId():number {
             return this.id;
         }
-    }
 
-Этот объект не самостоятельный и у нег онет модели поведения. Он может использоваться как часть чего-либо.
-
-    class containerElement {
-
-        private items: objectElement[] = [];
-        private row:number = 0;
-        private col:number = 0;
-
-        constructor(){
-
-        }
-
-        public addItem(item:objectElement):void {
-            this.items.push(item);
-        }
-
-        public getItems():objectElement[]{
-            return this.items;
-        }
-
-         public setRow(row:number=0):void{
+        public setRow(row:number=0):void{
             this.row=row;
         }
 
@@ -77,6 +62,27 @@ ___
         public getRow():number {
             return this.row;
         }
+    }
+
+Этот объект не самостоятельный и у нег онет модели поведения. Он может использоваться как часть чего-либо.
+
+    class containerElement {
+
+        private items: objectElement[] = [];
+
+        constructor(){
+
+        }
+
+        public addItem(item:objectElement):void {
+            this.items.push(item);
+        }
+
+        public getItems():objectElement[]{
+            return this.items;
+        }
+
+        
     }
 
 Внутри контейнера `containerElement` собирается коллекция(массив) из `objectElement`. Контейнер так же является объектом, т.к. у него нет модели поведения.
